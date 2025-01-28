@@ -4,6 +4,18 @@
     <div class="flex-grow"></div>
     <div class="flex items-center">
       <p class="text-xs text-gray-600 mr-2">{{ date }}</p>
+      <UDropdown
+        :items="colorModeItems"
+        :ui="{ width: 'w-48', container: 'z-50' }"
+      >
+        <UButton
+          :icon="colorModeIcon"
+          size="xs"
+          :square="true"
+          variant="ghost"
+          color="gray"
+        />
+      </UDropdown>
       <UTooltip text="Add Feed">
         <UButton
           icon="i-lucide-plus-circle"
@@ -95,6 +107,40 @@ const date = computed(() => {
     year: "numeric",
   });
 });
+
+const colorMode = useColorMode();
+
+const colorModeIcon = computed(() => {
+  switch (colorMode.value) {
+    case 'light':
+      return 'i-lucide-sun';
+    case 'dark':
+      return 'i-lucide-moon';
+    default:
+      return 'i-lucide-monitor';
+  }
+});
+
+const colorModeItems = computed(() => [
+  {
+    label: 'Light',
+    icon: 'i-lucide-sun',
+    click: () => colorMode.preference = 'light',
+    active: colorMode.value === 'light'
+  },
+  {
+    label: 'Dark',
+    icon: 'i-lucide-moon',
+    click: () => colorMode.preference = 'dark',
+    active: colorMode.value === 'dark'
+  },
+  {
+    label: 'System',
+    icon: 'i-lucide-monitor',
+    click: () => colorMode.preference = 'system',
+    active: colorMode.value === 'system'
+  }
+]);
 
 const items = computed(() => {
   const userLabel = user.value.email ?? "Unknown User";

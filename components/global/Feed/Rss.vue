@@ -42,7 +42,7 @@ const {
   refresh,
 } = await useFetch("/api/feed/rss", {
   params: {
-    feedUrl: props.feedUrl,
+    feedUrl: props.url,
   },
   server: false,
   lazy: true,

@@ -5,6 +5,9 @@
 </template>
 
 <script setup>
+const { $colorMode } = useNuxtApp();
+$colorMode.preference = 'light';
+
 useSeoMeta({
   title: "Feedful - a modern news reader",
   ogTitle: "Feedful - a modern news reader",

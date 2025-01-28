@@ -12,17 +12,16 @@ export default async () => {
       },
     };
 
-    if (process.env.NODE_ENV === "development") {
-      await sleep(1000);
-      return fixtures;
-    } else {
-      const response: Response = await fetch(URL, options);
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
-      const posts: Hackernews[] = await response.json();
-      return posts;
+    
+    const response: Response = await fetch(URL, options);
+    console.log(response);
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
     }
+    const posts: Hackernews[] = await response.json();
+    console.log(posts);
+    return posts;
+    
   } catch (error) {
     console.error(error);
     return [];
